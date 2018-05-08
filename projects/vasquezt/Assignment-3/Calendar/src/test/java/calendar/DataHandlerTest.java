@@ -44,4 +44,56 @@ public class DataHandlerTest{
 
   }
 
+  @Test(timeout = 4000)
+  public void test02()  throws Throwable  {  
+	
+	  DataHandler dataHandler;
+	  dataHandler = new DataHandler();
+	  
+	Calendar rightnow = Calendar.getInstance();
+	  
+	int thisMonth = rightnow.get(Calendar.MONTH);  
+	int thisDay = rightnow.get(Calendar.DAY_OF_MONTH);
+	int thisYear = rightnow.get(Calendar.YEAR);
+	
+	GregorianCalendar today = new GregorianCalendar(thisYear,thisMonth,thisDay);
+	GregorianCalendar tomorrow = new GregorianCalendar(thisYear,thisMonth,thisDay);  
+	
+	tomorrow.add(today.DAY_OF_MONTH,1);	
+	
+	LinkedList<CalDay> calDays = new LinkedList<CalDay>();
+	calDays = (LinkedList<CalDay>) dataHandler.getApptRange(today,tomorrow);	
+  
+  }
+
+  @Test(timeout = 4000)
+  public void test03()  throws Throwable  {
+		
+	  DataHandler dataHandler;
+	  dataHandler = new DataHandler();
+	  
+	Calendar rightnow = Calendar.getInstance();
+	  
+	int thisMonth = rightnow.get(Calendar.MONTH);  
+	int thisDay = rightnow.get(Calendar.DAY_OF_MONTH);
+	int thisYear = rightnow.get(Calendar.YEAR);
+	  
+	GregorianCalendar today = new GregorianCalendar(thisYear,thisMonth,thisDay);
+	GregorianCalendar tomorrow = new GregorianCalendar(thisYear,thisMonth,thisDay);  
+	
+	tomorrow.add(today.DAY_OF_MONTH,1);		
+	
+	Appt appt0 = new Appt(1, 1, 1, 1, 1, "Hello", "Wassup", "Gmail");
+	int[] recurDaysArr= {2, 3, 4};
+	appt0.setRecurrence(recurDaysArr, Appt.RECUR_BY_WEEKLY, 2, Appt.RECUR_NUMBER_FOREVER);
+	
+	Appt appt1 = new Appt(1, 1, 1, 1, 1, "Hello", "Wassup", "Gmail");
+	int[] recurDaysArr1= {2, 3, 4};
+	appt0.setRecurrence(recurDaysArr, Appt.RECUR_BY_YEARLY, 4, 20);
+	
+	dataHandler.saveAppt(appt0);
+	dataHandler.saveAppt(appt1);
+	
+  }
+  
 }
