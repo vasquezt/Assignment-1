@@ -376,8 +376,8 @@ public class DataHandler {
             case Appt.RECUR_BY_YEARLY:
                 //Just increment the year. The only possible problem is an 
                 //appointment that recurs on February 29.
-                nextDay.add(nextDay.YEAR, 1);
-                return nextDay;
+                day.add(day.YEAR, 1);
+                return day;
         }
         return null;
     }

@@ -176,8 +176,8 @@ public class Appt{
 		else if (startYear <= 0)
 			this.valid = false;
 		else {
-			int NumDaysInMonth = CalendarUtil.NumDaysInMonth(startYear, startMonth - 1);
-			if (startDay < 1 || startDay > NumDaysInMonth)
+			int NumDaysInMonth = CalendarUtil.NumDaysInMonth(startYear, startMonth);
+			if (startDay < 0 || startDay > NumDaysInMonth)
 				this.valid = false;
 			else
 				this.valid = true;
@@ -282,8 +282,8 @@ public class Appt{
      * @return True if the appointment occurs on a certain day/month/year
      */
     public boolean isOn(int day, int month, int year) {
-        return (day == getStartDay() && month == getStartMonth() 
-                && year == getStartYear());
+        return (day == getStartDay() || month == getStartMonth() 
+                || year == getStartYear());
     }
     
     /**
