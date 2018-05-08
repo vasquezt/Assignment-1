@@ -63,4 +63,15 @@ public void test03() throws Throwable {
 	
 }
 
+@Test(timeout = 4000)
+public void test04() throws Throwable {
+	Appt appt0 = new Appt(1, 1, 1, 1, 1, "Hello", "Wassup", "Gmail");
+	int[] recurDaysArr= {2, 3, 4};
+	appt0.setRecurrence(recurDaysArr, Appt.RECUR_BY_WEEKLY, 2, Appt.RECUR_NUMBER_FOREVER);
+	
+	Appt appt1 = new Appt(1, 1, 1, 1, 1, "Hello", "Wassup", "Gmail");
+	int[] recurDaysArr1= {2, 3, 4};
+	appt0.setRecurrence(recurDaysArr, Appt.RECUR_BY_YEARLY, 4, 20);
+}
+
 }

@@ -27,21 +27,21 @@ public class DataHandlerTest{
 
 
   }
- /* @Test(timeout = 4000)
+  @Test(timeout = 4000)
   public void test01()  throws Throwable  {
 	  Calendar calendar1 = new GregorianCalendar(2015, 10, 10);
 	  Calendar calendar2 = new GregorianCalendar(2016, 4, 3);	  
-	  CalDay calday1 = new CalDay((GregorianCalendar) calendar);
-	  CalDay calday2 = new CalDay((GregorianCalendar) calendar);
+	  CalDay calday1 = new CalDay((GregorianCalendar) calendar1);
+	  CalDay calday2 = new CalDay((GregorianCalendar) calendar2);
 	  Appt appt0 = new Appt(1, 1, 1, 1, 1, "Hello", "Wasup", "gmail");
 	  Appt appt1 = new Appt(2, 2, 1, 1, 1, "Hello", "Wasup", "gmail"); 
 	  calday1.addAppt(appt0);
 	  calday2.addAppt(appt1);
 	  DataHandler dataHandler;
-	  dataHandler = new DataHandler(); 
-	  List<CalDay> mylist = new ArrayList<CalDay>();
-	  mylist = dataHandler.getApptRange(calendar1, calendar2);
+	  dataHandler = new DataHandler();
+      LinkedList<CalDay> calDays = new LinkedList<CalDay>();
+	  //calDays = (LinkedList<CalDay>) dataHandler.getApptRange(calday1,calday2);	
 
-  }*/
+  }
 
 }
