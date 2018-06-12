@@ -1,6 +1,7 @@
 
 package finalprojectB;
 
+import finalprojectA.ResultPair;
 import junit.framework.TestCase;
 
 //You can use this as a skeleton for your 3 different test approach
@@ -24,23 +25,109 @@ public class UrlValidatorTest extends TestCase {
    {
 //You can use this function to implement your manual testing	   
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-	 /*  
+	 
 	   assertTrue(urlVal.isValid("http://www.google.com"));
 	   assertTrue(urlVal.isValid("http://www.google.com/"));
 	   assertTrue(urlVal.isValid("http://youtu.be/dQw4w9WgXcQ?t=1s"));
-	   assertTrue(urlVal.isValid("reddit.com/r/pcmassterrace"));
-	   assertTrue(urlVal.isValid("https://youtu.be/dQw4w9WgXcQ?t=1s"));
+	   //assertTrue(urlVal.isValid("reddit.com/r/pcmassterrace"));
+	   urlVal.isValid("https://youtu.be/dQw4w9WgXcQ?t=1s");
 	   assertTrue(urlVal.isValid("216.58.216.42"));
 	   
 	   assertFalse(urlVal.isValid(null));
 	   assertFalse(urlVal.isValid("http://kfj9sdjf98.jjJjj/"));
-   */
+   
    }
    
    
    public void testYourFirstPartition()
    {
-	 //You can use this function to implement your First Partition testing	   
+	 //You can use this function to implement your First Partition testing	  
+	   System.out.println("\n\nFIRST PARTITION\n\n");
+	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);	   
+	   ResultPair[] testUrlPort = {
+			   new ResultPair(":80", true),
+			   new ResultPair(":65525", true),
+			   new ResultPair(":0", true),
+			   new ResultPair("", true),
+			   
+			   new ResultPair(":-1", false),
+			   new ResultPair(":65636", false),
+			   new ResultPair(":65a", false)
+	   };
+	   
+	   String base = "http://www.google.com";
+	   String tail = "/test";
+	   
+	   for(int i = 0; i < testUrlPort.length; i++) {
+		   StringBuilder message = new StringBuilder("");	
+		   message.append(base);
+		   message.append(testUrlPort[i].item);
+		   message.append(tail);
+		   
+		   //Test isValid();
+		   boolean validity, result;
+		   validity = testUrlPort[i].valid;
+		   result = urlVal.isValid(message.toString());
+		   
+		   if(validity != result) {
+			   System.out.print(validity);			  
+			   System.out.print(" is wrong:  ");
+			   System.out.print(message.toString());
+			   System.out.printf("\n");
+		   }
+	   }
+	   
+	   
+	   System.out.println("\n\nEND OF FIRST PARTITION\n\n");
+   }
+   
+   public void testYourSecondPartition(){
+		 //You can use this function to implement your Second Partition testing	     
+	   System.out.println("\n\nSECOND PARTITION\n\n");
+	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);	   
+	   ResultPair[] testUrlScheme = {
+			   new ResultPair("http://", true),
+               new ResultPair("ftp://", true),
+               new ResultPair("h3t://", true),
+               new ResultPair("", true),
+               
+               new ResultPair("3ht://", false),
+               new ResultPair("http:/", false),
+               new ResultPair("http:", false),
+               new ResultPair("http/", false),
+               new ResultPair("://", false)
+       };
+	   
+	   String tail = "www.google.com:80/test1";
+	   
+	   for(int i = 0; i < testUrlScheme.length; i++) {
+		   StringBuilder message = new StringBuilder("");	
+		   message.append(testUrlScheme[i].item);
+		   message.append(tail);
+		   
+		   //Test isValid();
+		   boolean validity, result;
+		   validity = testUrlScheme[i].valid;
+		   result = urlVal.isValid(message.toString());
+		   
+		   System.out.println("hello");
+		   if(validity != result) {
+			   System.out.print(validity);			  
+			   System.out.print(" is wrong:  ");
+			   System.out.print(message.toString());
+			   System.out.printf("\n");
+		   }
+	   }
+	   
+	   
+	   System.out.println("\n\nEND OF SECOND PARTITION\n\n");
+   }
+   //You need to create more test cases for your Partitions if you need to 
+   
+   public void testIsValid()
+   {
+	   //You can use this function for programming based testing
+	   System.out.println("\n\ntestIsValid()\n\n");	   
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	   ResultPair[] testUrlScheme = {
 			   new ResultPair("http://", true),
@@ -103,10 +190,10 @@ public class UrlValidatorTest extends TestCase {
 		   boolean result;
 		   result = urlVal.isValid(message.toString());
 		   if(result != validity) {
-			   System.out.println(result);			  
-			   System.out.print(" is wrong:");
+			   System.out.print(result);			  
+			   System.out.print(" is wrong:  ");
 			   System.out.print(message.toString());
-			   System.out.printf("%n");
+			   System.out.printf("\n");
 		   }
 		   
 		   //increment
@@ -124,21 +211,7 @@ public class UrlValidatorTest extends TestCase {
 			   }
 		   }
 	   }
-			   
-	   
-	   
-   }
-   
-   public void testYourSecondPartition(){
-		 //You can use this function to implement your Second Partition testing	   
-
-   }
-   //You need to create more test cases for your Partitions if you need to 
-   
-   public void testIsValid()
-   {
-	   //You can use this function for programming based testing
-
+	   System.out.println("\n\nend of testIsValid\n\n");   
    }
    
 
