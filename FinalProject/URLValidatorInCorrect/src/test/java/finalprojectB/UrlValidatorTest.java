@@ -23,19 +23,26 @@ public class UrlValidatorTest extends TestCase {
    
    public void testManualTest()
    {
-//You can use this function to implement your manual testing	   
-	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-	 
-	   assertTrue(urlVal.isValid("http://www.google.com"));
-	   assertTrue(urlVal.isValid("http://www.google.com/"));
-	   assertTrue(urlVal.isValid("http://youtu.be/dQw4w9WgXcQ?t=1s"));
-	   //assertTrue(urlVal.isValid("reddit.com/r/pcmassterrace"));
-	   urlVal.isValid("https://youtu.be/dQw4w9WgXcQ?t=1s");
-	   assertTrue(urlVal.isValid("216.58.216.42"));
+//You can use this function to implement your manual testing
+	   UrlValidator val = new UrlValidator(null,null,UrlValidator.ALLOW_ALL_SCHEMES + UrlValidator.NO_FRAGMENTS);
+	   assertTrue(val.isValid("http://www.reddit.com"));
+	   assertTrue(val.isValid("http://216.58.216.42"));
+	   assertTrue(val.isValid("http://www.23984j32498j234.agdfa/"));
+	   assertFalse(val.isValid("http://216.asd32983y982y98327//"));
+	   assertFalse(val.isValid("http://reddit.com:r:pcmasterrace"));
+	   assertFalse(val.isValid("http://reddit.com:-550"));
+	   assertFalse(val.isValid("http://google.com/??&&??&&??& &??")); //test query
+	   assertFalse(val.isValid("http://google.com/#")); //test fragment
 	   
-	   assertFalse(urlVal.isValid(null));
-	   assertFalse(urlVal.isValid("http://kfj9sdjf98.jjJjj/"));
-   
+	   //tests after here fail
+	   
+	   assertTrue(val.isValid("https://youtu.be/dQw4w9WgXcQ?t=1s"));
+	   assertTrue(val.isValid("https://youtube.com/watch?v=dQw4w9WgXcQ?t=1s"));
+	   assertFalse(val.isValid("555.12.0.15"));
+	   assertTrue(val.isValid("http://kfj9sdjf98.jjJjj/"));
+	   assertTrue(val.isValid("https://google.com/"));
+	   assertTrue(val.isValid("reddit.com/r/pcmasterrace"));
+	   assertTrue(val.isValid("216.58.216.42"));
    }
    
    
